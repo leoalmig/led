@@ -7,4 +7,6 @@ main()
     printw("Hello!");
     getch();
     endwin();
+
+    return 0;
 }
