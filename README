@@ -1,0 +1,7 @@
+led - leco's editor
+
+simple ncurses editor
+
+dependencies: ncurses (libncurses-dev)
+
+usage: led <file>
