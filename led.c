@@ -3,22 +3,42 @@
 
 #include <ncurses.h>
 
+typedef struct buf_line {
+    int size;
+    char *content;
+} buf_line;
+
 typedef struct scr_buffer {
     char filepath[100];
+    buf_line *lines;
 } scr_buffer;
 
-scr_buffer*
-load_file_in_buffer(char *filepath)
+/* Initialize an empty line of size 100 */
+void
+init_line(buf_line *line)
 {
-    scr_buffer *buf = (scr_buffer *)malloc(sizeof(scr_buffer));
+    line->size = 100;
+    line->content = (char *)malloc(100 * sizeof(char));
+    line->content[0] = '\0';
+}
 
+scr_buffer*
+init_screen_buffer(char *filepath, int num_of_lines)
+{
+    int i;
+
+    scr_buffer *buf = (scr_buffer *)malloc(sizeof(scr_buffer));
     strcpy(buf->filepath, filepath);
+
+    buf->lines = (buf_line *)malloc(num_of_lines * sizeof(buf_line));
+    for (i = 0; i < num_of_lines; i++)
+        init_line(buf->lines + i);
 
     return buf;
 }
 
 void
-release_buffer(scr_buffer *buf)
+release_screen_buffer(scr_buffer *buf)
 {
     free(buf);
 }
@@ -53,13 +73,13 @@ main(int argc, char *argv[])
     else
         fp = fopen(argv[1], "w");
 
-    buf = load_file_in_buffer(argv[1]);
+    buf = init_screen_buffer(argv[1], 1);
     fclose(fp);
 
     printw("File: %s\n", buf->filepath);
     getch();
 
-    release_buffer(buf);
+    release_screen_buffer(buf);
     endwin();
 
     return 0;
