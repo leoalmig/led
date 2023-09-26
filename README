@@ -4,4 +4,8 @@ simple ncurses editor
 
 dependencies: ncurses (libncurses-dev)
 
+building:
+* make clean
+* make
+
 usage: led <file>
