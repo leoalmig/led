@@ -20,7 +20,7 @@ main(int argc, char *argv[])
     else
         fp = fopen(argv[1], "w");
 
-    buf = init_screen_buffer(argv[1], 1);
+    buf = init_screen_buffer(argv[1], BASE_NUM_OF_LINES);
     fclose(fp);
 
     printw("File: %s\n", buf->filepath);

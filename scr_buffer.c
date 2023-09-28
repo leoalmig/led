@@ -12,6 +12,8 @@ init_screen_buffer(char *filepath, int num_of_lines)
     for (i = 0; i < num_of_lines; i++)
         init_line(buf->lines + i);
 
+    buf->size = num_of_lines;
+
     return buf;
 }
 
