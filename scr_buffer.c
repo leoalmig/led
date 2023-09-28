@@ -13,6 +13,7 @@ init_screen_buffer(char *filepath, int num_of_lines)
         init_line(buf->lines + i);
 
     buf->size = num_of_lines;
+    buf->num_of_lines = 0;
 
     return buf;
 }

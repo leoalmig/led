@@ -12,6 +12,7 @@ typedef struct scr_buffer {
     char filepath[100];
     buf_line *lines;
     int size;
+    int num_of_lines;
 } scr_buffer;
 
 scr_buffer *init_screen_buffer(char *filepath, int num_of_lines);
