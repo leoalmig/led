@@ -4,5 +4,6 @@
 #include <stdio.h>
 
 int file_exists(char *filepath);
+int count_lines(FILE *fp);
 
 #endif
