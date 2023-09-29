@@ -22,5 +22,6 @@ count_lines(FILE *fp)
             count++;
 
     fseek(fp, 0, SEEK_SET);
+
     return count;
 }

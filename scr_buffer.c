@@ -26,3 +26,23 @@ release_screen_buffer(scr_buffer *buf)
 
     free(buf);
 }
+
+void
+render_buffer(scr_buffer *buf, int start, int end)
+{
+    int i, line;
+
+    for (i = start, line = 0; i < buf->num_of_lines && i < end; i++, line++) {
+        move(line, 0);
+        clrtoeol();
+        printw("%s", buf->lines[i].content);
+    }
+
+    if (start < end) {
+        move(line, 0);
+        clrtoeol();
+        move(line - 1, strlen(buf->lines[line - 1].content));
+    }
+
+    refresh();
+}

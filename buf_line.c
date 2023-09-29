@@ -23,14 +23,21 @@ increase_line_length(buf_line *line)
 }
 
 void
-append_char(buf_line *line, char ch)
+insert_char(buf_line *line, char ch, int index)
 {
     int i;
-    int last_idx = strlen(line->content);
 
     if (strlen(line->content) >= line->size - 2)
         increase_line_length(line);
 
-    line->content[last_idx] = ch;
-    line->content[last_idx + 1] = '\0';
+    for (i = strlen(line->content); i >= index; i--)
+        line->content[i + 1] = line->content[i];
+
+    line->content[index] = ch;
+}
+
+void
+append_char(buf_line *line, char ch)
+{
+    insert_char(line, ch, strlen(line->content));
 }

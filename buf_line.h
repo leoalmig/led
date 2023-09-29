@@ -9,6 +9,7 @@ typedef struct buf_line {
 } buf_line;
 
 void init_line(buf_line *line);
+void insert_char(buf_line *line, char ch, int index);
 void append_char(buf_line *line, char ch);
 
 #endif
