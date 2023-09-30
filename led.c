@@ -96,6 +96,9 @@ move_up(scr_buffer *buf, int *x, int *y)
     if (*y > 0)
         (*y)--;
 
+    if (*x > strlen(buf->lines[*y].content))
+        *x = strlen(buf->lines[*y].content);
+
     move(*y, *x);
 }
 
@@ -104,6 +107,9 @@ move_down(scr_buffer *buf, int *x, int *y)
 {
     if (*y < LINES && *y < buf->num_of_lines - 1)
         (*y)++;
+
+    if (*x > strlen(buf->lines[*y].content))
+        *x = strlen(buf->lines[*y].content);
 
     move(*y, *x);
 }
