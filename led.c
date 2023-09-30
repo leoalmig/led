@@ -53,7 +53,9 @@ main(int argc, char *argv[])
             move_left(buf, &x, &y);
             break;
         default:
-            // TODO add char
+            insert_char(&(buf->lines[y]), ch, x);
+            render_buffer(buf, 0, LINES - 1);
+            move_right(buf, &x, &y);
         }
     }
 
