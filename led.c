@@ -20,6 +20,24 @@ move_down(scr_buffer *buf, int *x, int *y)
     move(*y, *x);
 }
 
+void
+move_right(scr_buffer *buf, int *x, int *y)
+{
+    if (*x < strlen(buf->lines[*y].content))
+        (*x)++;
+
+    move(*y, *x);
+}
+
+void
+move_left(scr_buffer *buf, int *x, int *y)
+{
+    if (*x > 0)
+        (*x)--;
+
+    move(*y, *x);
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -64,9 +82,12 @@ main(int argc, char *argv[])
         case KEY_DOWN:
             move_down(buf, &x, &y);
             break;
-        case KEY_LEFT:
         case KEY_RIGHT:
-            // TODO implement movement
+            move_right(buf, &x, &y);
+            break;
+        case KEY_LEFT:
+            move_left(buf, &x, &y);
+            break;
         default:
             // TODO add char
         }
