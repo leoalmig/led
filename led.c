@@ -2,12 +2,31 @@
 
 #include "led.h"
 
+void
+move_up(scr_buffer *buf, int *x, int *y)
+{
+    if (*y > 0)
+        (*y)--;
+
+    move(*y, *x);
+}
+
+void
+move_down(scr_buffer *buf, int *x, int *y)
+{
+    if (*y < LINES && *y < buf->num_of_lines - 1)
+        (*y)++;
+
+    move(*y, *x);
+}
+
 int
 main(int argc, char *argv[])
 {
     FILE *fp;
     scr_buffer *buf;
     int size = 0;
+    int x, y;
 
     if (argc != 2) {
         printf("Usage: %s <filepath>\n", argv[0]);
@@ -15,6 +34,8 @@ main(int argc, char *argv[])
     }
 
     initscr();
+    noecho();
+    keypad(stdscr, true);
 
     if (file_exists(argv[1])) {
         fp = fopen(argv[1], "r");
@@ -29,12 +50,31 @@ main(int argc, char *argv[])
 
     load_file_in_buffer(buf, argv[1]);
     render_buffer(buf, 0, LINES - 1);
+    getyx(stdscr, y, x);
 
-    getch();
+    while (TRUE) {
+        int ch = getch();
 
-    release_screen_buffer(buf);
+        switch (ch) {
+        case KEY_F(4):
+            goto quit;
+        case KEY_UP:
+            move_up(buf, &x, &y);
+            break;
+        case KEY_DOWN:
+            move_down(buf, &x, &y);
+            break;
+        case KEY_LEFT:
+        case KEY_RIGHT:
+            // TODO implement movement
+        default:
+            // TODO add char
+        }
+    }
+
+quit:
     endwin();
-
+    release_screen_buffer(buf);
     return 0;
 }
 
