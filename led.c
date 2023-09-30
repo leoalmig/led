@@ -52,6 +52,11 @@ main(int argc, char *argv[])
         case KEY_LEFT:
             move_left(buf, &x, &y);
             break;
+        case '\n':
+            insert_line_in_buffer(buf, x, y);
+            render_buffer(buf, 0, LINES - 1);
+            move_start_next_line(buf, &x, &y);
+            break;
         default:
             insert_char(&(buf->lines[y]), ch, x);
             render_buffer(buf, 0, LINES - 1);
@@ -131,5 +136,15 @@ move_left(scr_buffer *buf, int *x, int *y)
     if (*x > 0)
         (*x)--;
 
+    move(*y, *x);
+}
+
+void
+move_start_next_line(scr_buffer *buf, int *x, int *y)
+{
+    if (*y < LINES && *y < buf->num_of_lines - 1)
+        (*y)++;
+
+    *x = 0;
     move(*y, *x);
 }

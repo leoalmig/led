@@ -19,5 +19,6 @@ typedef struct scr_buffer {
 scr_buffer *init_screen_buffer(char *filepath, int num_of_lines);
 void release_screen_buffer(scr_buffer *buf);
 void render_buffer(scr_buffer *buf, int start, int end);
+void insert_line_in_buffer(scr_buffer *buf, int x, int y);
 
 #endif

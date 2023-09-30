@@ -46,3 +46,29 @@ render_buffer(scr_buffer *buf, int start, int end)
 
     refresh();
 }
+
+void
+insert_line_in_buffer(scr_buffer *buf, int x, int y)
+{
+    int i;
+    for (i = buf->num_of_lines - 1; i >= y; i--)
+        buf->lines[i + 1] = buf->lines[i];
+
+    buf_line line;
+    init_line(&line);
+
+    if (x > 0) {
+        int j, k;
+        for (j = 0, k = x; buf->lines[y].content[k] != '\0'; j++, k++)
+            line.content[j] = buf->lines[y].content[k];
+
+        line.content[j] = '\0';
+        buf->lines[y].content[x] = '\0';
+        buf->lines[y].size = x;
+        buf->lines[y + 1] = line;
+    } else {
+        buf->lines[y] = line;
+    }
+
+    (buf->num_of_lines)++;
+}

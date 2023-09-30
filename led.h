@@ -10,5 +10,6 @@ void move_up(scr_buffer *buf, int *x, int *y);
 void move_down(scr_buffer *buf, int *x, int *y);
 void move_right(scr_buffer *buf, int *x, int *y);
 void move_left(scr_buffer *buf, int *x, int *y);
+void move_start_next_line(scr_buffer *buf, int *x, int *y);
 
 #endif
