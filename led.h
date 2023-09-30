@@ -4,7 +4,11 @@
 #include "utils.h"
 #include "scr_buffer.h"
 
-int count_lines(FILE *fp);
 void load_file_in_buffer(scr_buffer *buf, char *filename);
+
+void move_up(scr_buffer *buf, int *x, int *y);
+void move_down(scr_buffer *buf, int *x, int *y);
+void move_right(scr_buffer *buf, int *x, int *y);
+void move_left(scr_buffer *buf, int *x, int *y);
 
 #endif

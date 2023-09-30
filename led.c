@@ -2,42 +2,6 @@
 
 #include "led.h"
 
-void
-move_up(scr_buffer *buf, int *x, int *y)
-{
-    if (*y > 0)
-        (*y)--;
-
-    move(*y, *x);
-}
-
-void
-move_down(scr_buffer *buf, int *x, int *y)
-{
-    if (*y < LINES && *y < buf->num_of_lines - 1)
-        (*y)++;
-
-    move(*y, *x);
-}
-
-void
-move_right(scr_buffer *buf, int *x, int *y)
-{
-    if (*x < strlen(buf->lines[*y].content))
-        (*x)++;
-
-    move(*y, *x);
-}
-
-void
-move_left(scr_buffer *buf, int *x, int *y)
-{
-    if (*x > 0)
-        (*x)--;
-
-    move(*y, *x);
-}
-
 int
 main(int argc, char *argv[])
 {
@@ -124,4 +88,40 @@ load_file_in_buffer(scr_buffer *buf, char *filename)
     }
 
     fclose(fp);
+}
+
+void
+move_up(scr_buffer *buf, int *x, int *y)
+{
+    if (*y > 0)
+        (*y)--;
+
+    move(*y, *x);
+}
+
+void
+move_down(scr_buffer *buf, int *x, int *y)
+{
+    if (*y < LINES && *y < buf->num_of_lines - 1)
+        (*y)++;
+
+    move(*y, *x);
+}
+
+void
+move_right(scr_buffer *buf, int *x, int *y)
+{
+    if (*x < strlen(buf->lines[*y].content))
+        (*x)++;
+
+    move(*y, *x);
+}
+
+void
+move_left(scr_buffer *buf, int *x, int *y)
+{
+    if (*x > 0)
+        (*x)--;
+
+    move(*y, *x);
 }
