@@ -40,6 +40,9 @@ main(int argc, char *argv[])
         switch (ch) {
         case KEY_F(4):
             goto quit;
+        case KEY_F(5):
+            // TODO save and quit
+            goto quit;
         case KEY_UP:
             move_up(buf, &x, &y);
             break;
@@ -56,6 +59,9 @@ main(int argc, char *argv[])
             insert_line_in_buffer(buf, x, y);
             render_buffer(buf, 0, LINES - 1);
             move_start_next_line(buf, &x, &y);
+            break;
+        case KEY_BACKSPACE:
+            // TODO backspace
             break;
         default:
             insert_char(&(buf->lines[y]), ch, x);
